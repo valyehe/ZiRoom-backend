@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vayle.project.mapper.TenantMapper">
+
+    <resultMap id="BaseResultMap" type="com.vayle.project.model.entity.Tenant">
+            <id property="tId" column="tId" jdbcType="INTEGER"/>
+            <result property="tNickname" column="tNickname" jdbcType="VARCHAR"/>
+            <result property="tPhone" column="tPhone" jdbcType="VARCHAR"/>
+            <result property="tEmail" column="tEmail" jdbcType="VARCHAR"/>
+            <result property="tPassword" column="tPassword" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        tId,tNickname,tPhone,
+        tEmail,tPassword
+    </sql>
+</mapper>

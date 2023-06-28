@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vayle.project.mapper.RoomsMapper">
+
+    <resultMap id="BaseResultMap" type="com.vayle.project.model.entity.Rooms">
+            <id property="roomId" column="roomId" jdbcType="INTEGER"/>
+            <result property="roomName" column="roomName" jdbcType="VARCHAR"/>
+            <result property="roomArea" column="roomArea" jdbcType="VARCHAR"/>
+            <result property="roomNumber" column="roomNumber" jdbcType="VARCHAR"/>
+            <result property="roomNumbers" column="roomNumbers" jdbcType="VARCHAR"/>
+            <result property="houseType" column="houseType" jdbcType="VARCHAR"/>
+            <result property="floor" column="floor" jdbcType="VARCHAR"/>
+            <result property="roomLocation" column="roomLocation" jdbcType="VARCHAR"/>
+            <result property="elevator" column="elevator" jdbcType="VARCHAR"/>
+            <result property="completion" column="completion" jdbcType="VARCHAR"/>
+            <result property="heatingType" column="heatingType" jdbcType="VARCHAR"/>
+            <result property="afforest" column="afforest" jdbcType="VARCHAR"/>
+            <result property="areaLocation" column="areaLocation" jdbcType="VARCHAR"/>
+            <result property="subway" column="subway" jdbcType="VARCHAR"/>
+            <result property="tenementName" column="tenementName" jdbcType="VARCHAR"/>
+            <result property="roomPrice" column="roomPrice" jdbcType="INTEGER"/>
+            <result property="characterName" column="characterName" jdbcType="VARCHAR"/>
+            <result property="orientationName" column="orientationName" jdbcType="VARCHAR"/>
+            <result property="statusName" column="statusName" jdbcType="VARCHAR"/>
+            <result property="specialOffer" column="specialOffer" jdbcType="VARCHAR"/>
+            <result property="roomTime" column="roomTime" jdbcType="INTEGER"/>
+            <result property="videoURL" column="videoURL" jdbcType="VARCHAR"/>
+            <result property="roomPic" column="roomPic" jdbcType="VARCHAR"/>
+            <result property="uid" column="uid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        roomId,roomName,roomArea,
+        roomNumber,roomNumbers,houseType,
+        floor,roomLocation,elevator,
+        completion,heatingType,afforest,
+        areaLocation,subway,tenementName,
+        roomPrice,characterName,orientationName,
+        statusName,specialOffer,roomTime,
+        videoURL,roomPic,uid
+    </sql>
+</mapper>
