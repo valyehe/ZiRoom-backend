@@ -132,6 +132,45 @@ public class TenantServiceImpl extends ServiceImpl<TenantMapper, Tenant>
         return true;
     }
 
+    @Override
+    public int tenantUpdate(Tenant tenant, HttpServletRequest request) {
+
+        Integer tId = tenant.getTId();
+        String tNickname = tenant.getTNickname();
+        String tenantPhone = tenant.getTPhone();
+        String tEmail = tenant.getTEmail();
+        String tenantPassword = tenant.getTPassword();
+        if (StringUtils.isAnyBlank(tenantPhone, tenantPassword)) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数为空");
+        }
+        if (tenantPhone.length() < 11) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "账号错误");
+        }
+        if (tenantPassword.length() < 8) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码错误");
+        }
+        synchronized (tenantPassword.intern()) {
+            // 账户不能重复
+            QueryWrapper<Tenant> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("tPhone", tenantPhone);
+            long count = tenantMapper.selectCount(queryWrapper);
+            if (count > 0) {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR, "账号重复");
+            }
+        }
+        // 2. 加密
+        String encryptPassword = DigestUtils.md5DigestAsHex((SALT + tenantPassword).getBytes());
+
+        Tenant updateTenant = new Tenant();
+        updateTenant.setTId(tId);
+        updateTenant.setTNickname(tNickname);
+        updateTenant.setTPhone(tenantPhone);
+        updateTenant.setTEmail(tEmail);
+        updateTenant.setTPassword(encryptPassword);
+
+        return tenantMapper.updateById(updateTenant);
+    }
+
 
 }
 

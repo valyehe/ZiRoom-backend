@@ -1,4 +1,4 @@
-package com.vayle.project.model.dto.room;
+package com.vayle.project.model.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class RoomsQueryUsersRequest extends PageRequest implements Serializable {
+public class RoomsVo extends PageRequest implements Serializable {
     /**
      * 房屋ID
      */
@@ -154,6 +154,36 @@ public class RoomsQueryUsersRequest extends PageRequest implements Serializable 
      * 头像地址
      */
     private String upicture;
+
+    /**
+     * 房间|房屋图片地址
+     */
+    private String pictureURL;
+
+    /**
+     * 房间|房屋标签名称
+     */
+    private String titleName;
+
+    /**
+     * 约看时间
+     */
+    private String seeTime;
+
+    /**
+     * 约看手机号
+     */
+    private String seePhone;
+
+    /**
+     * 问题
+     */
+    private String problem;
+
+    /**
+     * 咨询电话
+     */
+    private String cPhone;
 
 
 

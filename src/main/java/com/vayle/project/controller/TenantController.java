@@ -7,9 +7,7 @@ import com.vayle.project.common.ErrorCode;
 import com.vayle.project.common.ResultUtils;
 import com.vayle.project.exception.BusinessException;
 import com.vayle.project.model.dto.tenant.TenantRequest;
-import com.vayle.project.model.dto.users.UsersRequest;
 import com.vayle.project.model.entity.Tenant;
-import com.vayle.project.model.entity.Users;
 import com.vayle.project.service.TenantService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -77,6 +75,30 @@ public class TenantController {
     }
 
     /**
+     * 更新用户
+     *
+     * @param tenantUpdateRequest
+     * @return
+     */
+    @PostMapping("/update")
+    public BaseResponse<Integer> updateTenant(@RequestBody TenantRequest tenantUpdateRequest, HttpServletRequest httpServletRequest) {
+        if (tenantUpdateRequest == null || tenantUpdateRequest.getTId() == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        String tNickname = tenantUpdateRequest.getTNickname();
+        String tenantPhone = tenantUpdateRequest.getTPhone();
+        String tenantPassword = tenantUpdateRequest.getTPassword();
+        if (StringUtils.isAnyBlank(tNickname,tenantPhone, tenantPassword)) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Tenant tenant = new Tenant();
+        BeanUtils.copyProperties(tenantUpdateRequest, tenant);
+        int result = tenantService.tenantUpdate(tenant,httpServletRequest);
+        return ResultUtils.success(result);
+    }
+
+
+    /**
      * 用户注销
      *
      * @param request
@@ -140,23 +162,6 @@ public class TenantController {
         }
         boolean b = tenantService.removeById(tenantDeleteRequest.getTId());
         return ResultUtils.success(b);
-    }
-
-    /**
-     * 更新用户
-     *
-     * @param tenantUpdateRequest
-     * @return
-     */
-    @PostMapping("/update")
-    public BaseResponse<Boolean> updateTenant(@RequestBody TenantRequest tenantUpdateRequest) {
-        if (tenantUpdateRequest == null || tenantUpdateRequest.getTId() == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR);
-        }
-        Tenant tenant = new Tenant();
-        BeanUtils.copyProperties(tenantUpdateRequest, tenant);
-        boolean result = tenantService.updateById(tenant);
-        return ResultUtils.success(result);
     }
 
     /**

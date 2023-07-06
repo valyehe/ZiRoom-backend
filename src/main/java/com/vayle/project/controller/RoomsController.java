@@ -6,13 +6,15 @@ import com.vayle.project.common.BaseResponse;
 import com.vayle.project.common.ErrorCode;
 import com.vayle.project.common.ResultUtils;
 import com.vayle.project.exception.BusinessException;
-import com.vayle.project.model.dto.room.RoomsQueryUsersRequest;
 import com.vayle.project.model.dto.room.RoomsRequest;
 import com.vayle.project.model.entity.Rooms;
+import com.vayle.project.model.vo.AttributeVo;
+import com.vayle.project.model.vo.RoomsVo;
 import com.vayle.project.service.RoomsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -47,14 +49,61 @@ public class RoomsController {
      *
      */
     @GetMapping("/get/user")
-    public BaseResponse<RoomsQueryUsersRequest> getUsersByRoom(@RequestParam("roomId") int roomId) {
+    public BaseResponse<RoomsVo> getUsersByRoom(@RequestParam("roomId") int roomId) {
         if (roomId <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        RoomsQueryUsersRequest roomsQueryUsersRequest = roomsService.roomsQueryUsersRequest(roomId);
-        return ResultUtils.success(roomsQueryUsersRequest);
+        RoomsVo roomsVo = roomsService.roomsQueryUsers(roomId);
+        return ResultUtils.success(roomsVo);
     }
 
+    /**
+     * 根据 id 获取title
+     *
+     * @param roomId
+     * @return {@link BaseResponse}<{@link List}<{@link RoomsVo}>>
+     */
+    @GetMapping("/get/title")
+    public BaseResponse<List<RoomsVo>> getTitleByRoomId(@RequestParam("roomId") int roomId) {
+        List<RoomsVo> list = roomsService.selectTitleByRoomId(roomId);
+        return ResultUtils.success(list);
+    }
+
+    /**
+     * 根据 id 获取pic
+     *
+     * @param roomId
+     * @return {@link BaseResponse}<{@link List}<{@link RoomsVo}>>
+     */
+    @GetMapping("/get/pic")
+    public BaseResponse<List<RoomsVo>> getPictureByRoomId(@RequestParam("roomId") int roomId) {
+        List<RoomsVo> list = roomsService.selectPictureByRoomId(roomId);
+        return ResultUtils.success(list);
+    }
+
+    /**
+     * 根据 id 获取see
+     *
+     * @param roomId
+     * @return {@link BaseResponse}<{@link List}<{@link RoomsVo}>>
+     */
+    @GetMapping("/get/see")
+    public BaseResponse<List<RoomsVo>> getSeeByRoomId(@RequestParam("roomId") int roomId) {
+        List<RoomsVo> list = roomsService.selectSeeByRoomId(roomId);
+        return ResultUtils.success(list);
+    }
+
+    /**
+     * 根据 id 获取house
+     *
+     * @param roomId
+     * @return {@link BaseResponse}<{@link List}<{@link RoomsVo}>>
+     */
+    @GetMapping("/get/house")
+    public BaseResponse<List<RoomsVo>> getHouseByRoomId(@RequestParam("roomId") int roomId) {
+        List<RoomsVo> list = roomsService.selectHouseByRoomId(roomId);
+        return ResultUtils.success(list);
+    }
 
     /**
      * 创建房子

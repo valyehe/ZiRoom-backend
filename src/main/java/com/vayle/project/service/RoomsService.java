@@ -1,9 +1,11 @@
 package com.vayle.project.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.vayle.project.model.dto.room.RoomsQueryUsersRequest;
 import com.vayle.project.model.entity.Rooms;
+import com.vayle.project.model.vo.AttributeVo;
+import com.vayle.project.model.vo.RoomsVo;
 
+import java.util.List;
 
 
 /**
@@ -13,6 +15,12 @@ import com.vayle.project.model.entity.Rooms;
 */
 public interface RoomsService extends IService<Rooms> {
 
-    RoomsQueryUsersRequest roomsQueryUsersRequest(int roomId);
+    RoomsVo roomsQueryUsers(int roomId);
+
+    List<RoomsVo> selectTitleByRoomId(int roomId);
+    List<RoomsVo> selectPictureByRoomId(int roomId);
+    List<RoomsVo> selectSeeByRoomId(int roomId);
+    List<RoomsVo> selectHouseByRoomId(int roomId);
+
 
 }

@@ -2,6 +2,9 @@ package com.vayle.project.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.vayle.project.model.entity.Attribute;
+import com.vayle.project.model.vo.AttributeVo;
+
+import java.util.List;
 
 
 /**
@@ -11,6 +14,8 @@ import com.vayle.project.model.entity.Attribute;
 * @Entity generator.domain.Attribute
 */
 public interface AttributeMapper extends BaseMapper<Attribute> {
+
+    List<AttributeVo> selectValuesByAttrId();
 
 }
 

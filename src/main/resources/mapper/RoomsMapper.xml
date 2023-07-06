@@ -42,8 +42,23 @@
         videoURL,roomPic,uid
     </sql>
 
-    <select id="selectUsersByRoomId" parameterType="int" resultType="com.vayle.project.model.dto.room.RoomsQueryUsersRequest">
+    <select id="selectUsersByRoomId" parameterType="int" resultType="com.vayle.project.model.vo.RoomsVo">
         select * from rooms left join users u on rooms.uid = u.uid where roomId = #{roomId}
     </select>
 
+    <select id="selectTitleByRoomId" parameterType="int" resultType="com.vayle.project.model.vo.RoomsVo">
+        select * from rooms left join roomtitle u on rooms.roomId = u.roomId where rooms.roomId = #{roomId}
+    </select>
+
+    <select id="selectPictureByRoomId" parameterType="int" resultType="com.vayle.project.model.vo.RoomsVo">
+        select * from rooms left join roompicture u on rooms.roomId = u.roomId where rooms.roomId = #{roomId}
+    </select>
+
+    <select id="selectSeeByRoomId" parameterType="int" resultType="com.vayle.project.model.vo.RoomsVo">
+        select * from rooms left join consultsee u on rooms.roomId = u.roomId where rooms.roomId = #{roomId}
+    </select>
+
+    <select id="selectHouseByRoomId" parameterType="int" resultType="com.vayle.project.model.vo.RoomsVo">
+        select * from rooms left join consulthouse u on rooms.roomId = u.roomId where rooms.roomId = #{roomId}
+    </select>
 </mapper>

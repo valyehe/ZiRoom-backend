@@ -9,7 +9,13 @@
             <result property="attrName" column="attrName" jdbcType="VARCHAR"/>
     </resultMap>
 
+
     <sql id="Base_Column_List">
         attrId,attrName
     </sql>
+
+    <select id="selectValuesByAttrId" resultType="com.vayle.project.model.vo.AttributeVo">
+        select * from attribute left join attrvalue a on attribute.attrId = a.attrId
+    </select>
+
 </mapper>

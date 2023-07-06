@@ -8,11 +8,13 @@ import com.vayle.project.common.ResultUtils;
 import com.vayle.project.exception.BusinessException;
 import com.vayle.project.model.dto.attr.AttributeRequest;
 import com.vayle.project.model.entity.Attribute;
+import com.vayle.project.model.vo.AttributeVo;
 import com.vayle.project.service.AttributeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -41,6 +43,17 @@ public class AttributeController {
         }
         Attribute attribute = attributeService.getById(attrId);
         return ResultUtils.success(attribute);
+    }
+
+    /**
+     * 根据 id 获取分类
+     *
+     * @return {@link BaseResponse}<{@link AttributeVo}>
+     */
+    @GetMapping("/list/attr")
+    public BaseResponse<List<AttributeVo>> listValuesByAttrId() {
+        List<AttributeVo> list = attributeService.selectValuesByAttrId();
+        return ResultUtils.success(list);
     }
 
 

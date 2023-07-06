@@ -47,6 +47,8 @@ public interface TenantService extends IService<Tenant> {
      * @return
      */
     boolean tenantLogout(HttpServletRequest request);
+
+    int tenantUpdate(Tenant tenant, HttpServletRequest request);
     
 
 }
