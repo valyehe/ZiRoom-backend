@@ -54,7 +54,7 @@ public class TenantServiceImpl extends ServiceImpl<TenantMapper, Tenant>
         synchronized (tenantPassword.intern()) {
             // 账户不能重复
             QueryWrapper<Tenant> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("tphone", tenantPhone);
+            queryWrapper.eq("tPhone", tenantPhone);
             long count = tenantMapper.selectCount(queryWrapper);
             if (count > 0) {
                 throw new BusinessException(ErrorCode.PARAMS_ERROR, "账号重复");

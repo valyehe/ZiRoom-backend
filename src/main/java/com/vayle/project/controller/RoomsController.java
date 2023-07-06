@@ -6,12 +6,12 @@ import com.vayle.project.common.BaseResponse;
 import com.vayle.project.common.ErrorCode;
 import com.vayle.project.common.ResultUtils;
 import com.vayle.project.exception.BusinessException;
+import com.vayle.project.model.dto.room.RoomsQueryUsersRequest;
 import com.vayle.project.model.dto.room.RoomsRequest;
 import com.vayle.project.model.entity.Rooms;
 import com.vayle.project.service.RoomsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 
 
@@ -41,6 +41,20 @@ public class RoomsController {
         Rooms rooms = roomsService.getById(roomId);
         return ResultUtils.success(rooms);
     }
+
+    /**
+     * 根据 id 获取房子中介
+     *
+     */
+    @GetMapping("/get/user")
+    public BaseResponse<RoomsQueryUsersRequest> getUsersByRoom(@RequestParam("roomId") int roomId) {
+        if (roomId <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        RoomsQueryUsersRequest roomsQueryUsersRequest = roomsService.roomsQueryUsersRequest(roomId);
+        return ResultUtils.success(roomsQueryUsersRequest);
+    }
+
 
     /**
      * 创建房子
